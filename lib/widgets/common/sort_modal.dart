@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
 
-enum SortOption { recent, oldest, name, project }
+enum SortOption { recent, oldest}
 
 class SortModal extends StatelessWidget {
   final bool isOpen;
@@ -117,13 +117,9 @@ class SortModal extends StatelessWidget {
   String _getSortLabel(SortOption option) {
     switch (option) {
       case SortOption.recent:
-        return 'Most Recent';
+        return 'Recent';
       case SortOption.oldest:
-        return 'Oldest First';
-      case SortOption.name:
-        return 'Name A-Z';
-      case SortOption.project:
-        return 'Project';
+        return 'Oldest';
     }
   }
 
@@ -133,10 +129,6 @@ class SortModal extends StatelessWidget {
         return Icons.access_time;
       case SortOption.oldest:
         return Icons.history;
-      case SortOption.name:
-        return Icons.sort_by_alpha;
-      case SortOption.project:
-        return Icons.work;
     }
   }
 } 

@@ -183,12 +183,6 @@ class _TimerListScreenState extends State<TimerListScreen> {
       case SortOption.oldest:
         sortedTimers.sort((a, b) => a.id.compareTo(b.id));
         break;
-      case SortOption.name:
-        sortedTimers.sort((a, b) => a.title.compareTo(b.title));
-        break;
-      case SortOption.project:
-        sortedTimers.sort((a, b) => a.project.name.compareTo(b.project.name));
-        break;
     }
     
     return sortedTimers;
