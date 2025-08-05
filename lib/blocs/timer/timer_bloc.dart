@@ -29,6 +29,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
     // Start timer tick
     _startTimerTick();
+    
+    // Add some sample timers for testing
+    _addSampleTimers();
   }
 
   void _startTimerTick() {
@@ -231,6 +234,33 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   List<Project> get projects => _projects;
+
+  void _addSampleTimers() {
+    // Add sample timers for testing
+    add(AddTimer(
+      title: 'Design Review',
+      description: 'Review the new UI designs for the mobile app',
+      projectId: '1',
+      deadline: '2024-01-15',
+      isFavorite: true,
+    ));
+    
+    add(AddTimer(
+      title: 'Code Implementation',
+      description: 'Implement the timer functionality',
+      projectId: '2',
+      deadline: '2024-01-20',
+      isFavorite: false,
+    ));
+    
+    add(AddTimer(
+      title: 'Testing',
+      description: 'Test the timer application thoroughly',
+      projectId: '3',
+      deadline: '2024-01-25',
+      isFavorite: true,
+    ));
+  }
 
   @override
   Future<void> close() {

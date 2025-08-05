@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../blocs/timer/timer_bloc.dart';
 import '../blocs/timer/timer_state.dart';
+import '../blocs/timer/timer_event.dart';
+import '../models/timer.dart' as timer_model;
 import '../widgets/common/custom_app_bar.dart';
 import '../widgets/common/custom_button.dart';
 import '../utils/constants.dart';
@@ -72,7 +74,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                     final timer = state.timers.firstWhere(
                       (t) => t.id == widget.timerId,
                       orElse: () => throw Exception('Timer not found'),
-                    );
+                    ) as timer_model.Timer;
 
                     return TabBarView(
                       controller: _tabController,
@@ -97,7 +99,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildDetailsTab(dynamic timer) {
+  Widget _buildDetailsTab(timer_model.Timer timer) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -174,7 +176,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildTimesheetsTab(dynamic timer) {
+  Widget _buildTimesheetsTab(timer_model.Timer timer) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -203,21 +205,17 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CustomButton(
-                        text: timer.isRunning == true ? 'Pause' : 'Play',
-                        icon: timer.isRunning == true ? Icons.pause : Icons.play_arrow,
-                        onPressed: () {
-                          // TODO: Implement play/pause functionality
-                        },
-                      ),
-                      CustomButton(
-                        text: 'Stop',
-                        icon: Icons.stop,
-                        backgroundColor: Colors.red.withOpacity(0.2),
-                        onPressed: () {
-                          // TODO: Implement stop functionality
-                        },
-                      ),
+                                             CustomButton(
+                         text: timer.isRunning ? 'Pause' : 'Play',
+                         icon: timer.isRunning ? Icons.pause : Icons.play_arrow,
+                         onPressed: () => _handlePlayPause(timer),
+                       ),
+                                             CustomButton(
+                         text: 'Stop',
+                         icon: Icons.stop,
+                         backgroundColor: Colors.red.withOpacity(0.2),
+                         onPressed: () => _handleStop(timer),
+                       ),
                     ],
                   ),
                 ],
@@ -292,5 +290,19 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
         ],
       ),
     );
+  }
+
+  void _handlePlayPause(timer_model.Timer timer) {
+    final bloc = context.read<TimerBloc>();
+    if (timer.isRunning) {
+      bloc.add(PauseTimer(id: timer.id));
+    } else {
+      bloc.add(StartTimer(id: timer.id));
+    }
+  }
+
+  void _handleStop(timer_model.Timer timer) {
+    final bloc = context.read<TimerBloc>();
+    bloc.add(StopTimer(id: timer.id));
   }
 } 
