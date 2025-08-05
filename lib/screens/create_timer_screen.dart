@@ -20,6 +20,7 @@ class _CreateTimerScreenState extends State<CreateTimerScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _deadlineController = TextEditingController();
   String? _selectedProjectId;
   String _deadline = '';
   bool _isFavorite = false;
@@ -28,6 +29,7 @@ class _CreateTimerScreenState extends State<CreateTimerScreen> {
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _deadlineController.dispose();
     super.dispose();
   }
 
@@ -114,6 +116,7 @@ class _CreateTimerScreenState extends State<CreateTimerScreen> {
 
                         // Deadline Input
                         TextFormField(
+                          controller: _deadlineController,
                           decoration: const InputDecoration(
                             labelText: 'Deadline',
                             hintText: 'Select deadline',
@@ -127,8 +130,10 @@ class _CreateTimerScreenState extends State<CreateTimerScreen> {
                               lastDate: DateTime.now().add(const Duration(days: 365)),
                             );
                             if (date != null) {
+                              final formattedDate = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
                               setState(() {
-                                _deadline = date.toIso8601String().split('T')[0];
+                                _deadline = formattedDate;
+                                _deadlineController.text = formattedDate;
                               });
                             }
                           },
