@@ -61,7 +61,7 @@ lib/
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone git@github.com:xhadix/timer_app_flutter.git
 cd timer_app
 ```
 
