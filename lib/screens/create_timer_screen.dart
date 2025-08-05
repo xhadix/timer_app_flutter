@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../blocs/timer/timer_bloc.dart';
+import '../blocs/timer/timer_state.dart';
+import '../blocs/timer/timer_event.dart';
 import '../widgets/common/custom_app_bar.dart';
 import '../widgets/common/custom_button.dart';
 import '../utils/constants.dart';

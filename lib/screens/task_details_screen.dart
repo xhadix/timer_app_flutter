@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../blocs/timer/timer_bloc.dart';
+import '../blocs/timer/timer_state.dart';
 import '../widgets/common/custom_app_bar.dart';
 import '../widgets/common/custom_button.dart';
 import '../utils/constants.dart';
@@ -239,10 +240,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                   ),
                   const SizedBox(height: AppSpacing.md),
                   
-                  _buildInfoRow('Status', timer.status?.toString().split('.').last ?? 'Unknown'),
-                  _buildInfoRow('Total Time', TimeHelpers.formatTime(timer.totalTime ?? 0)),
-                  _buildInfoRow('Elapsed Time', TimeHelpers.formatTime(timer.elapsedTime ?? 0)),
-                  _buildInfoRow('Remaining Time', TimeHelpers.formatTime((timer.totalTime ?? 0) - (timer.elapsedTime ?? 0))),
+                  _buildSimpleInfoRow('Status', timer.status?.toString().split('.').last ?? 'Unknown'),
+                  _buildSimpleInfoRow('Total Time', TimeHelpers.formatTime(timer.totalTime ?? 0)),
+                  _buildSimpleInfoRow('Elapsed Time', TimeHelpers.formatTime(timer.elapsedTime ?? 0)),
+                  _buildSimpleInfoRow('Remaining Time', TimeHelpers.formatTime((timer.totalTime ?? 0) - (timer.elapsedTime ?? 0))),
                 ],
               ),
             ),
@@ -274,7 +275,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
+  Widget _buildSimpleInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Row(

@@ -38,7 +38,7 @@ class AppTheme {
       ),
       
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.cardBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -156,17 +156,7 @@ class AppTheme {
         ),
       ),
       
-      // Dropdown Button Theme
-      dropdownButtonTheme: DropdownButtonThemeData(
-        style: DropdownButton.styleFrom(
-          backgroundColor: AppColors.cardBackground,
-          foregroundColor: AppColors.textPrimary,
-          elevation: 8,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-        ),
-      ),
+      // Dropdown Button Theme - Removed due to compatibility issues
       
       // Text Theme
       textTheme: const TextTheme(
